@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+  <title>Phone Screencast</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📱 Phone Screencast</h1>
+      <p class="subtitle">Cast your phone screen via USB</p>
+    </header>
+
+    <main>
+      <div class="section">
+        <h2>Connected Devices</h2>
+        <button id="refreshBtn" class="btn btn-primary">
+          <span class="btn-icon">🔄</span> Refresh Devices
+        </button>
+        
+        <div id="deviceList" class="device-list">
+          <div class="loading">Searching for devices...</div>
+        </div>
+      </div>
+
+      <div class="section" id="deviceInfo" style="display: none;">
+        <h2>Device Information</h2>
+        <div id="deviceDetails" class="device-details"></div>
+      </div>
+
+      <div class="section" id="controls" style="display: none;">
+        <h2>Screencast Controls</h2>
+        
+        <div class="options-grid">
+          <div class="option-group">
+            <label for="maxSize">Max Resolution:</label>
+            <select id="maxSize">
+              <option value="720">720p</option>
+              <option value="1024" selected>1024p</option>
+              <option value="1920">1080p</option>
+            </select>
+          </div>
+
+          <div class="option-group">
+            <label for="bitRate">Bit Rate:</label>
+            <select id="bitRate">
+              <option value="4M">4 Mbps</option>
+              <option value="8M" selected>8 Mbps</option>
+              <option value="16M">16 Mbps</option>
+            </select>
+          </div>
+
+          <div class="option-group">
+            <label for="maxFps">Max FPS:</label>
+            <select id="maxFps">
+              <option value="30">30 FPS</option>
+              <option value="60" selected>60 FPS</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button id="startBtn" class="btn btn-success">
+            <span class="btn-icon">▶️</span> Start Screencast
+          </button>
+          <button id="stopBtn" class="btn btn-danger" style="display: none;">
+            <span class="btn-icon">⏹️</span> Stop Screencast
+          </button>
+        </div>
+      </div>
+
+      <div class="section info-section">
+        <h2>Setup Instructions</h2>
+        <ol class="instructions">
+          <li>
+            <strong>Install ADB (Android Debug Bridge):</strong>
+            <ul>
+              <li>Windows: Download from <a href="https://developer.android.com/studio/releases/platform-tools" target="_blank">Android SDK Platform Tools</a></li>
+              <li>Mac: <code>brew install android-platform-tools</code></li>
+              <li>Linux: <code>sudo apt install adb</code></li>
+            </ul>
+          </li>
+          <li>
+            <strong>Install scrcpy:</strong>
+            <ul>
+              <li>Windows: <code>scoop install scrcpy</code> or download from <a href="https://github.com/Genymobile/scrcpy" target="_blank">GitHub</a></li>
+              <li>Mac: <code>brew install scrcpy</code></li>
+              <li>Linux: <code>sudo apt install scrcpy</code></li>
+            </ul>
+          </li>
+          <li>
+            <strong>Enable USB Debugging on your Android phone:</strong>
+            <ul>
+              <li>Go to Settings → About Phone</li>
+              <li>Tap "Build Number" 7 times to enable Developer Options</li>
+              <li>Go to Settings → Developer Options</li>
+              <li>Enable "USB Debugging"</li>
+            </ul>
+          </li>
+          <li><strong>Connect your phone via USB cable</strong></li>
+          <li><strong>Accept the USB debugging prompt on your phone</strong></li>
+          <li><strong>Click "Refresh Devices" above to detect your phone</strong></li>
+        </ol>
+      </div>
+
+      <div class="status-bar" id="statusBar">
+        <span id="statusText">Ready</span>
+      </div>
+    </main>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
